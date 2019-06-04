@@ -5,11 +5,12 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './create-client.component.html',
   styleUrls: ['./create-client.component.sass']
 })
-export class CreateClientComponent implements OnInit {
+export class CreateClientComponent {
 
   constructor() { }
-
-  ngOnInit() {
+  
+  saveData(name, firstLastName, secondLastName, age, birthData) {
+    console.log(name, firstLastName, secondLastName, age, birthData)
   }
 
 }
