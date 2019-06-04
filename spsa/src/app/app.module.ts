@@ -12,11 +12,13 @@ import { ServiceDatabaseService } from './service/service-database.service';
 
 import { AppComponent } from './app.component';
 import { CreateClientComponent } from './components/create-client/create-client.component';
+import { DashboardClientComponent } from './components/dashboard-client/dashboard-client.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateClientComponent
+    CreateClientComponent,
+    DashboardClientComponent
   ],
   imports: [
     BrowserModule,
