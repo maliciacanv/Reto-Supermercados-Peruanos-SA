@@ -22,10 +22,10 @@ export class ServiceDatabaseService {
     fechaDeNacimiento: '',
   }
   
-  constructor(public addData: AngularFirestore) {}
+  constructor(public addData: AngularFirestore, 
+              public getData: AngularFirestore ) {} 
   
   addDataClient(name, firstLastName, secondLastName, age, birthData) {
-    console.log(name, firstLastName, secondLastName, age, birthData)
     const data = {
       ...this.clientData,
       nombre: name,
@@ -35,6 +35,10 @@ export class ServiceDatabaseService {
       fechaDeNacimiento: birthData,
     }
       this.addData.collection('clientes').add(data);
+  }
+
+  getDatClient() {
+    return this.getData.collection('clientes').valueChanges();
   }
 
 }
