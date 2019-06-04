@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ServiceDatabaseService } from '../../service/service-database.service'
 
 @Component({
   selector: 'app-create-client',
@@ -7,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateClientComponent {
 
-  constructor() { }
+  constructor( public serviceData: ServiceDatabaseService ) { }
   
   saveData(name, firstLastName, secondLastName, age, birthData) {
-    console.log(name, firstLastName, secondLastName, age, birthData)
+    this.serviceData.addDataClient(name, firstLastName, secondLastName, age, birthData)
   }
 
 }
