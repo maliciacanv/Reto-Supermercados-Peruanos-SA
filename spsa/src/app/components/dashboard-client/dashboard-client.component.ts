@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ServiceDatabaseService } from '../../service/service-database.service'
+import { ServiceDatabaseService } from '../../service/service-database.service';
+import { ServiceFirestoreService } from '../../service/service-firestore.service';
 
 @Component({
   selector: 'app-dashboard-client',
@@ -8,13 +9,27 @@ import { ServiceDatabaseService } from '../../service/service-database.service'
 })
 export class DashboardClientComponent {
 
-  public dataClients: object = {};
+  public dataClients;
 
-  constructor(public getDataService: ServiceDatabaseService ) {
+  public totalEdades;
+
+  constructor(  public dataService: ServiceDatabaseService,
+                public getDataService: ServiceFirestoreService ) {
 
     this.getDataService.getDatClient().subscribe((data: object) => { 
     this.dataClients = data });
+
+     this.dataService.total.subscribe((total: number ) => {
+      this.totalEdades = total })
    }
+
+   dataClientsForPromedio(){
+     this.dataService.promedio(this.dataClients)    
+    }
+    
+    
+
+
  
 
   

@@ -2,9 +2,10 @@
   <div class="calc-container row ml-5">
     <label for="inputEmail3" class="col-sm-4 col-form-label">Promedio de edades</label>
     <div class="data col-sm-4">
-      <span>15</span>
+      <span>{{totalEdades}}</span>
     </div>
   </div>
+  <button type="button" (click)="dataClientsForPromedio()">clik</button>
   <div class="calc-container row ml-5">
     <label for="inputEmail3" class="col-sm-4 col-form-label">Desviación estandar de edades</label>
     <div class="data col-sm-4">
@@ -14,7 +15,7 @@
   <div class="container-table ml-5 mr-5">
     <table class="table">
       <thead class="thead-dark">
-        <tr>
+        <tr class="text-center">
           <th scope="col">#</th>
           <th scope="col">Nombre</th>
           <th scope="col">Apellido paterno</th>
@@ -24,15 +25,15 @@
           <th scope="col">Difunción</th>
         </tr>
       </thead>
-      <tbody *ngFor = "let dataClient of dataClients ">
-        <tr>
+      <tbody *ngFor="let dataClient of dataClients">
+        <tr class="text-center">
           <td>1</td>
           <td>{{ dataClient.nombre }}</td>
-          <td>Otto</td>
-          <td>Otto</td>
-          <td>Otto</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+          <td>{{ dataClient.apellidoPaterno }}</td>
+          <td>{{ dataClient.apellidoMaterno }}</td>
+          <td>{{ dataClient.fechaDeNacimiento }}</td>
+          <td>{{ dataClient.edad | number }}</td>
+          <td></td>
         </tr>
       </tbody>
     </table>    

@@ -9,6 +9,7 @@ import { environment } from '../environments/environment'
 import { APP_ROUTING } from './app.routes';
 
 import { ServiceDatabaseService } from './service/service-database.service';
+import { ServiceFirestoreService } from './service/service-firestore.service';
 
 import { AppComponent } from './app.component';
 import { CreateClientComponent } from './components/create-client/create-client.component';
@@ -26,7 +27,7 @@ import { DashboardClientComponent } from './components/dashboard-client/dashboar
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
-  providers: [ ServiceDatabaseService ],
+  providers: [ ServiceDatabaseService, ServiceFirestoreService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

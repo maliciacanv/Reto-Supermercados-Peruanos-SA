@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore} from '@angular/fire/firestore';
+import { BehaviorSubject } from 'rxjs';
+import { ServiceFirestoreService } from './service-firestore.service'
 
 export interface Client {
   nombre: string,
@@ -21,24 +22,35 @@ export class ServiceDatabaseService {
     edad: '',
     fechaDeNacimiento: '',
   }
+
+  public totalEdades = new BehaviorSubject(0)
+  total = this.totalEdades.asObservable()
   
-  constructor(public addData: AngularFirestore, 
-              public getData: AngularFirestore ) {} 
+  constructor( public serviceFirestore: ServiceFirestoreService ) {} 
   
-  addDataClient(name, firstLastName, secondLastName, age, birthData) {
+  addData(name, firstLastName, secondLastName, age, birthData) {
     const data = {
       ...this.clientData,
       nombre: name,
       apellidoPaterno: firstLastName,
       apellidoMaterno: secondLastName,
-      edad: parseInt(age),
+      edad: age,
       fechaDeNacimiento: birthData,
     }
-      this.addData.collection('clientes').add(data);
+      this.serviceFirestore.addDatClient(data);
   }
 
-  getDatClient() {
-    return this.getData.collection('clientes').valueChanges();
+  promedio(obj) {
+    const total = obj.reduce((acumulador, objeto) => {
+    return acumulador + parseInt(objeto.edad)},0)
+    const promedio = Math.round(total/obj.length);
+    this.totalEdades.next(promedio)
   }
+
+
+
+  
+
+
 
 }

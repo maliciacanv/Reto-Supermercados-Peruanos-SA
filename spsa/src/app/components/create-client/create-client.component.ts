@@ -11,7 +11,7 @@ export class CreateClientComponent {
   constructor( public serviceData: ServiceDatabaseService ) { }
   
   saveData(name, firstLastName, secondLastName, age, birthData) {
-    this.serviceData.addDataClient(name, firstLastName, secondLastName, age, birthData)
+    this.serviceData.addData(name, firstLastName, secondLastName, age, birthData)
   }
 
 }
