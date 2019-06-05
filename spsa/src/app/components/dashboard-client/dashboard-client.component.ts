@@ -20,6 +20,7 @@ export class DashboardClientComponent {
                 public getDataService: ServiceFirestoreService ) {
 
     this.getDataService.getDatClient().subscribe((data: object) => { 
+    
     this.dataClients = data });
 
      this.dataService.total.subscribe((total: number ) => {

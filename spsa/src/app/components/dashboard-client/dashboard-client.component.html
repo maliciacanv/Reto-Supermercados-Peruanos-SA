@@ -34,7 +34,7 @@
           <td>{{ dataClient.apellidoMaterno }}</td>
           <td>{{ dataClient.fechaDeNacimiento }}</td>
           <td>{{ dataClient.edad | number }}</td>
-          <td>{{ dataClient.fechaDefuncion }}</td>
+          <td>{{ dataClient.fechaDefuncion.toDate() | date:'longDate'}}</td>
         </tr>
       </tbody>
     </table>    
