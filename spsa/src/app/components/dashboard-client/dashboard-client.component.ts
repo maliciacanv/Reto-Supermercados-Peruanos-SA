@@ -13,6 +13,9 @@ export class DashboardClientComponent {
 
   public totalEdades;
 
+  public totalDesviacionEstandar = 0;
+
+
   constructor(  public dataService: ServiceDatabaseService,
                 public getDataService: ServiceFirestoreService ) {
 
@@ -24,13 +27,23 @@ export class DashboardClientComponent {
    }
 
    dataClientsForPromedio(){
-     this.dataService.promedio(this.dataClients)    
+     this.dataService.promedio(this.dataClients)  
     }
     
-    
+    desviacionEstandar() {
+      const distancia = this.dataClients.map(ele => { return Math.pow((ele.edad - this.totalEdades),2)})
+      const sumaDeTodsLasDistanciasDeEdades = distancia.reduce((acumulador, objeto) => {
+        return acumulador + objeto })
+      const sumaMasDistancia = Math.round(sumaDeTodsLasDistanciasDeEdades/distancia.length)
+      this.totalDesviacionEstandar = Math.round(Math.sqrt(sumaMasDistancia));
+    }
+  
+      
+}
+  
 
 
  
 
   
-}
+

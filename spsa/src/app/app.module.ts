@@ -14,12 +14,14 @@ import { ServiceFirestoreService } from './service/service-firestore.service';
 import { AppComponent } from './app.component';
 import { CreateClientComponent } from './components/create-client/create-client.component';
 import { DashboardClientComponent } from './components/dashboard-client/dashboard-client.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateClientComponent,
-    DashboardClientComponent
+    DashboardClientComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

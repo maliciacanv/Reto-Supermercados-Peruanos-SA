@@ -8,6 +8,7 @@ export interface Client {
   apellidoMaterno: string,
   edad: string,
   fechaDeNacimiento: string,
+  fechaDefuncion: any,
 }
 
 @Injectable({
@@ -21,14 +22,16 @@ export class ServiceDatabaseService {
     apellidoMaterno: '',
     edad: '',
     fechaDeNacimiento: '',
+    fechaDefuncion: '',
   }
+  
 
   public totalEdades = new BehaviorSubject(0)
   total = this.totalEdades.asObservable()
   
   constructor( public serviceFirestore: ServiceFirestoreService ) {} 
   
-  addData(name, firstLastName, secondLastName, age, birthData) {
+  addData(name, firstLastName, secondLastName, age, birthData, defuncion) {
     const data = {
       ...this.clientData,
       nombre: name,
@@ -36,9 +39,10 @@ export class ServiceDatabaseService {
       apellidoMaterno: secondLastName,
       edad: age,
       fechaDeNacimiento: birthData,
+      fechaDefuncion: defuncion(),
     }
       this.serviceFirestore.addDatClient(data);
-  }
+    }
 
   promedio(obj) {
     const total = obj.reduce((acumulador, objeto) => {
@@ -46,6 +50,8 @@ export class ServiceDatabaseService {
     const promedio = Math.round(total/obj.length);
     this.totalEdades.next(promedio)
   }
+ 
+}
 
 
 
@@ -53,4 +59,3 @@ export class ServiceDatabaseService {
 
 
 
-}
