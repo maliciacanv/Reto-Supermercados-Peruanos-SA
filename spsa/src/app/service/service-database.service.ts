@@ -24,11 +24,7 @@ export class ServiceDatabaseService {
     fechaDeNacimiento: '',
     fechaDefuncion: '',
   }
-  
-
-  public totalEdades = new BehaviorSubject(0)
-  total = this.totalEdades.asObservable()
-  
+    
   constructor( public serviceFirestore: ServiceFirestoreService ) {} 
   
   addData(name, firstLastName, secondLastName, age, birthData, defuncion) {
@@ -44,12 +40,7 @@ export class ServiceDatabaseService {
       this.serviceFirestore.addDatClient(data);
     }
 
-  promedio(obj) {
-    const total = obj.reduce((acumulador, objeto) => {
-    return acumulador + parseInt(objeto.edad)},0)
-    const promedio = Math.round(total/obj.length);
-    this.totalEdades.next(promedio)
-  }
+ 
  
 }
 

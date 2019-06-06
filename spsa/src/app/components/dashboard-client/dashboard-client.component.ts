@@ -11,7 +11,7 @@ export class DashboardClientComponent {
 
   public dataClients;
 
-  public totalEdades;
+  public totalPromedio = 0;
 
   public totalDesviacionEstandar = 0;
 
@@ -19,25 +19,25 @@ export class DashboardClientComponent {
   constructor(  public dataService: ServiceDatabaseService,
                 public getDataService: ServiceFirestoreService ) {
 
-    this.getDataService.getDatClient().subscribe((data: object) => { 
-    
+    this.getDataService.getDatClient().subscribe((data: object) => {  
     this.dataClients = data });
 
-     this.dataService.total.subscribe((total: number ) => {
-      this.totalEdades = total })
    }
 
-   dataClientsForPromedio(){
-     this.dataService.promedio(this.dataClients)  
-    }
+   promedio() {
+    const totalEdades = this.dataClients.reduce((acumulador, objeto) => {
+    return acumulador + parseInt(objeto.edad)},0)
+    const promedioCalculado = Math.round(totalEdades/this.dataClients.length);
+    this.totalPromedio = promedioCalculado;
+  }
     
-    desviacionEstandar() {
-      const distancia = this.dataClients.map(ele => { return Math.pow((ele.edad - this.totalEdades),2)})
-      const sumaDeTodsLasDistanciasDeEdades = distancia.reduce((acumulador, objeto) => {
-        return acumulador + objeto })
-      const sumaMasDistancia = Math.round(sumaDeTodsLasDistanciasDeEdades/distancia.length)
-      this.totalDesviacionEstandar = Math.round(Math.sqrt(sumaMasDistancia));
-    }
+  desviacionEstandar() {
+    const cuadradoAlaDistancia = this.dataClients.map(ele => { return Math.pow((ele.edad - this.totalPromedio),2)})
+    const totalDeCuadradoAlaDistancia = cuadradoAlaDistancia.reduce((acumulador, objeto) => {
+      return acumulador + objeto })
+    const totalDividido = Math.round(totalDeCuadradoAlaDistancia/cuadradoAlaDistancia.length)
+    this.totalDesviacionEstandar = Math.round(Math.sqrt(totalDividido));
+  }
   
       
 }
